@@ -414,7 +414,8 @@ body::-webkit-scrollbar {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  min-height: 400px;
+
+  
 }
 
 .footer-section {
