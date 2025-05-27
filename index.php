@@ -1,196 +1,72 @@
-
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Davis Portfolio</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="assets/css/boxicons.min.css">
-    <link rel="stylesheet" href="assets/fontawesome-free-6.4.0-web/css/all.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css" integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-</head>
-<body >
+<?php
+function sendToTelegramWithCurl($botToken, $chatId, $message) {
+    // Use IP address to bypass DNS issues
+    $url = "https://149.154.167.99/bot{$botToken}/sendMessage";
+    // Alternative IPs: 149.154.167.197, 149.154.167.198, 149.154.167.220
     
+    $data = [
+        'chat_id' => $chatId,
+        'text' => $message,
+        'parse_mode' => 'HTML'
+    ];
     
-    <section class="hero">
-      <nav class="navbar">
-        <div class="logo" style="display: flex;"><i class="fab fa-algolia" style="color: #ffd700; margin-right: 5px;"></i> <span style="color: #ffd700;">D</span>avis</div>
-        <div class="nav-links" >
-            <a href="#home">HOME</a>
-            <a href="#about">ABOUT</a>
-            <a href="">RESUME</a>
-            <a href="#portfolio">PORTFOLIO</a>
-            <a href="#blog">BLOG</a>
-            <a href="#contact">CONTACT</a>
-        </div>
-        <div class="menu">
-          <i class="bx bx-x"></i>
-            <h2>Menu</h2>
-            <a href="#home">HOME</a>
-            <a href="#about">ABOUT</a>
-            <a href="">RESUME</a>
-            <a href="#portfolio">PORTFOLIO</a>
-            <a href="#blog">BLOG</a>
-            <a href="#contact">CONTACT</a>
-        </div>
-        <button class="close" ><i class="bx bx-dots-vertical"></i></button>
-    </nav>
-        <h1 style="display: flex;">Hi, I am 
-          <div class="container" style="margin-left: 12px;" >
-            <p class="text" style="color: #ffd700;">Brecker b</p>
-          </div>
-        </h1>
-        <p>I am a frontend web developer. I can provide clean code and pixel perfect design.<br>
-           I also make website more & more interactive with web animations.</p>
-        <div class="social-links">
-            <a href="#"><i class="fab fa-facebook-f block"></i></a>
-            <a href="#"><i class="fab fa-twitter block"></i></a>
-            <a href="#"><i class="fab fa-github block"></i></a>
-        </div>
-    </section>
-
-    <section class="about" id="about"></section>
-        <div class="about-content">
-            <div class="about-image block">
-                <img src="20241204_131028.jpg" alt="Profile Image">
-            </div>
-            <div class="about-text">
-                <h2 class=" block">ABOUT ME</h2>
-                <h3 class=" block">Hi There! I'm Edward Davis</h3>
-                <p class=" block">Visual Designer</p>
-                <p class=" block">I am a Visual Designer - creating and designing user interface branding. Visual design seeks to attract, inspire, create desires and motivate people to respond to messages, with a view to making a favorable impact.</p>
-                
-                <div class="about-details">
-                    <div class="detail-row block">
-                        <span>Birthday</span>
-                        <span>: May 27, 1990</span>
-                    </div>
-                    <div class="detail-row block">
-                        <span>Phone</span>
-                        <span>: +1 876-369-9009</span>
-                    </div>
-                    <div class="detail-row block">
-                        <span>Email</span>
-                        <span>: davis@example.com</span>
-                    </div>
-                    <div class="detail-row block">
-                        <span>From</span>
-                        <span>: 2661 High meadow lane bear creek</span>
-                    </div>
-                    <div class="detail-row block">
-                        <span>Language</span>
-                        <span>: English, Germanic</span>
-                    </div>
-                    <div class="detail-row block">
-                        <span>Freelance</span>
-                        <span>: Available</span>
-                    </div>
-                </div>
-                
-                <a href="#" class="download-cv block">Download CV</a>
-            </div>
-        </div>
-    </section>
-
-<section class="services" >
-        <h2 class=" block">SERVICES</h2>
-        <div class="services-grid block">
-            <div class="service-card">
-                
-                <h3>Sketches</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor etim incididunt ut labore.</p>
-            </div>
-            <div class="service-card block">
-            
-                <h3>UI/UX Design</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor etim incididunt ut labore.</p>
-            </div>
-            <div class="service-card block">
-                
-                <h3>Product Design</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor etim incididunt ut labore.</p>
-            </div>
-            <div class="service-card block">
-                
-                <h3>App Design</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor etim incididunt ut labore.</p>
-            </div>
-            <div class="service-card block">
-                
-                <h3>Motion Graphics</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor etim incididunt ut labore.</p>
-            </div>
-            <div class="service-card block">
-                
-                <h3>Responsive Design</h3>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor etim incididunt ut labore.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="skills block" >
-        <h2>MY SKILLS</h2>
-        <div class="skills-content">
-            <div class="skill-bar">
-                <div class="skill-info">
-                    <span>Photoshop</span>
-                    <span>95%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 95%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-info">
-                    <span>Motion Graphic</span>
-                    <span>75%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 75%"></div>
-                </div>
-            </div>
-            <div class="skill-bar">
-                <div class="skill-info">
-                    <span>Adobe XD</span>
-                    <span>90%</span>
-                </div>
-                <div class="progress-bar">
-                    <div class="progress" style="width: 90%"></div>
-                </div>
-            </div>
-        </div>
-    </section>
+    $ch = curl_init();
+    curl_setopt($ch, CURLOPT_URL, $url);
+    curl_setopt($ch, CURLOPT_POST, true);
+    curl_setopt($ch, CURLOPT_POSTFIELDS, http_build_query($data));
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    curl_setopt($ch, CURLOPT_TIMEOUT, 30);
+    curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, 10);
+    curl_setopt($ch, CURLOPT_FOLLOWLOCATION, true);
+    curl_setopt($ch, CURLOPT_DNS_CACHE_TIMEOUT, 120);
     
-    <footer class="footer ">
-      <div class="footer-section block" >
-          <h3>Wealthome</h3>
-          <p>Lorem ipsum dolor sit amet consectetur bibendum sit non congue pharetra's pulvinar lo Sed ut amet ipsum</p>
-      </div>
-      <div class="footer-section block">
-          <h3>Quick Links</h3>
-          <ul class="footer-links block">
-              <li><a href="#">About Us</a></li>
-              <li><a href="#">Contact</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
-          </ul>
-      </div>
-      <div class="footer-section block" >
-          <h3>Support</h3>
-          <ul class="footer-links">
-              <li><a href="#">Tell@westhome.com</a></li>
-              <li><a href="#">4040 Parker Rd, Allentown, New Mexico 3134</a></li>
-          </ul>
-      </div>
-      <div class="footer-section ">
-          <h3>Get in touch</h3>
-          <p>Lorem ipsum dolor sit amet consectetur bibendum sit non congue pharetra's pulvinar lo Sed ut amet ipsum</p>
-      </div>
-      <div class="footer-bottom ">
-          Copyright 2025 codewithbrecker
-      </div>
-  </footer>
-    <script src="script.js"></script>
-</body>
-</html>
+    // Force IPv4 and set DNS servers
+    curl_setopt($ch, CURLOPT_IPRESOLVE, CURL_IPRESOLVE_V4);
+    curl_setopt($ch, CURLOPT_RESOLVE, ['api.telegram.org:443:149.154.167.99']);
+    
+    $result = curl_exec($ch);
+    $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    $curlError = curl_errno($ch);
+    $curlErrorMsg = curl_error($ch);
+    
+    curl_close($ch);
+    
+    if ($curlError) {
+        return ['ok' => false, 'error' => "cURL Error #{$curlError}: {$curlErrorMsg}"];
+    }
+    
+    if ($httpCode !== 200) {
+        return ['ok' => false, 'error' => "HTTP Error: {$httpCode}"];
+    }
+    
+    $decoded = json_decode($result, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        return ['ok' => false, 'error' => 'Invalid JSON response'];
+    }
+    
+    return $decoded ?: ['ok' => false, 'error' => 'Empty response'];
+}
+
+// Usage example for name and tracking ID
+$botToken = '7743998095:AAG1G1qAtY-HSGX_5pdHeh-KA-6ueGV0kKA';
+$chatId = '-1002675788685';
+
+// Sanitize input data (especially important if coming from form)
+$name = htmlspecialchars("John Doe");
+$trackingId = htmlspecialchars("TRK123456789");
+
+$message = "📦 <b>New Tracking Submission</b>\n\n";
+$message .= "👤 <b>Name:</b> {$name}\n";
+$message .= "🔢 <b>Tracking ID:</b> <code>{$trackingId}</code>\n";
+$message .= "⏰ <b>Time:</b> " . date('Y-m-d H:i:s');
+
+$result = sendToTelegramWithCurl($botToken, $chatId, $message);
+
+if ($result && isset($result['ok']) && $result['ok']) {
+    echo "Tracking information sent successfully!";
+} else {
+    echo "Error: " . ($result['error'] ?? ($result['description'] ?? 'Unknown error'));
+}
+?>
