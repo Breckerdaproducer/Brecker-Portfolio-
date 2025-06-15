@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Whumo Brian Rinywe - Creative Technologist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'primary': '#1a1a1a',
+                        'secondary': '#2d2d2d',
+                        'accent': '#4a5568',
+                        'gold': '#d4af37',
+                        'platinum': '#e5e7eb'
+                    },
+                    animation: {
+                        'fade-in': 'fadeIn 1.2s ease-in-out',
+                        'slide-up': 'slideUp 1s ease-out',
+                        'slide-right': 'slideRight 1s ease-out',
+                        'subtle-float': 'subtleFloat 4s ease-in-out infinite',
+                        'gentle-pulse': 'gentlePulse 3s ease-in-out infinite',
+                    },
+                    keyframes: {
+                        fadeIn: {
+                            '0%': { opacity: '0' },
+                            '100%': { opacity: '1' }
+                        },
+                        slideUp: {
+                            '0%': { transform: 'translateY(30px)', opacity: '0' },
+                            '100%': { transform: 'translateY(0)', opacity: '1' }
+                        },
+                        slideRight: {
+                            '0%': { transform: 'translateX(-30px)', opacity: '0' },
+                            '100%': { transform: 'translateX(0)', opacity: '1' }
+                        },
+                        subtleFloat: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-5px)' }
+                        },
+                        gentlePulse: {
+                            '0%, 100%': { opacity: '0.8' },
+                            '50%': { opacity: '1' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .professional-gradient {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
+        }
+        .gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f7e98e 100%);
+        }
+        .glass-professional {
+            backdrop-filter: blur(20px);
+            background: rgba(45, 45, 45, 0.95);
+            border: 1px solid rgba(212, 175, 55, 0.2);
+        }
+        .text-gold-gradient {
+            background: linear-gradient(135deg, #d4af37 0%, #f7e98e 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .professional-card {
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        .professional-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.4);
+            border-color: rgba(212, 175, 55, 0.3);
+        }
+        .image-overlay {
+            background: linear-gradient(45deg, rgba(26, 26, 26, 0.8), rgba(45, 45, 45, 0.6));
+        }
+        .professional-button {
+            background: linear-gradient(135deg, #2d2d2d 0%, #4a5568 100%);
+            border: 1px solid rgba(212, 175, 55, 0.3);
+            transition: all 0.3s ease;
+        }
+        .professional-button:hover {
+            background: linear-gradient(135deg, #d4af37 0%, #f7e98e 100%);
+            color: #1a1a1a;
+            transform: translateY(-2px);
+        }
+        
+        /* Mobile Menu Styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease-in-out;
+        }
+        .mobile-menu.active {
+            transform: translateX(0);
+        }
+        
+        /* Responsive Image Styles */
+        .hero-image {
+            aspect-ratio: 1;
+            object-fit: cover;
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #d4af37;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #f7e98e;
+        }
+        
+        /* Loading Animation */
+        .loading {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+        .loading.loaded {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body class="bg-primary text-platinum overflow-x-hidden">
+    <!-- Loading Screen -->
+    <div id="loading-screen" class="fixed inset-0 bg-primary z-50 flex items-center justify-center">
+        <div class="text-center">
+            <div class="w-16 h-16 border-4 border-gold border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
+            <p class="text-gold font-medium">Loading Portfolio...</p>
+        </div>
+    </div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-40 glass-professional">
+        <div class="container mx-auto px-4 sm:px-6 py-4">
+            <div class="flex justify-between items-center">
+                <div class="text-xl sm:text-2xl font-bold text-gold-gradient">WBR</div>
+                
+                <!-- Desktop Menu -->
+                <div class="hidden lg:flex space-x-8">
+                    <a href="#home" class="nav-link hover:text-gold transition-colors duration-300 font-medium">Home</a>
+                    <a href="#about" class="nav-link hover:text-gold transition-colors duration-300 font-medium">About</a>
+                    <a href="#expertise" class="nav-link hover:text-gold transition-colors duration-300 font-medium">Expertise</a>
+                    <a href="#portfolio" class="nav-link hover:text-gold transition-colors duration-300 font-medium">Portfolio</a>
+                    <a href="#contact" class="nav-link hover:text-gold transition-colors duration-300 font-medium">Contact</a>
+                </div>
+                
+                <!-- Mobile Menu Button -->
+                <button id="mobile-menu-btn" class="lg:hidden text-platinum focus:outline-none">
+                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                    </svg>
+                </button>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="mobile-menu fixed top-0 right-0 h-full w-64 bg-secondary shadow-2xl lg:hidden">
+            <div class="p-6">
+                <div class="flex justify-between items-center mb-8">
+                    <div class="text-xl font-bold text-gold-gradient">Menu</div>
+                    <button id="mobile-menu-close" class="text-platinum">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+                <nav class="space-y-4">
+                    <a href="#home" class="mobile-nav-link block py-3 px-4 rounded-lg hover:bg-primary transition-colors duration-300">Home</a>
+                    <a href="#about" class="mobile-nav-link block py-3 px-4 rounded-lg hover:bg-primary transition-colors duration-300">About</a>
+                    <a href="#expertise" class="mobile-nav-link block py-3 px-4 rounded-lg hover:bg-primary transition-colors duration-300">Expertise</a>
+                    <a href="#portfolio" class="mobile-nav-link block py-3 px-4 rounded-lg hover:bg-primary transition-colors duration-300">Portfolio</a>
+                    <a href="#contact" class="mobile-nav-link block py-3 px-4 rounded-lg hover:bg-primary transition-colors duration-300">Contact</a>
+                </nav>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div id="mobile-menu-overlay" class="fixed inset-0 bg-black bg-opacity-50 z-30 hidden lg:hidden"></div>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen professional-gradient flex items-center justify-center relative overflow-hidden pt-20">
+        <div class="absolute inset-0">
+            <div class="absolute top-20 left-4 sm:left-10 w-16 sm:w-32 h-16 sm:h-32 bg-gold opacity-5 rounded-full blur-3xl animate-gentle-pulse"></div>
+            <div class="absolute bottom-20 right-4 sm:right-10 w-12 sm:w-24 h-12 sm:h-24 bg-gold opacity-5 rounded-full blur-2xl animate-gentle-pulse" style="animation-delay: 1s;"></div>
+        </div>
+        
+        <div class="container mx-auto px-4 sm:px-6 relative z-10">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="text-center lg:text-left loading order-2 lg:order-1">
+                    <div class="mb-6">
+                        <p class="text-gold text-sm sm:text-lg font-medium mb-2 tracking-wide">CREATIVE TECHNOLOGIST</p>
+                        <h1 class="text-3xl sm:text-5xl lg:text-7xl font-bold mb-4 leading-tight">
+                            <span class="text-platinum">Whumo Brian</span>
+                            <span class="block text-gold-gradient animate-subtle-float">Rinywe</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl lg:text-2xl text-gray-300 leading-relaxed max-w-2xl mx-auto lg:mx-0">
+                            Software Engineer • Developer • Music Producer • Graphic Designer
+                        </p>
+                    </div>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+                        <button class="professional-button px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold text-platinum">
+                            View Portfolio
+                        </button>
+                        <button class="border border-gold text-gold px-6 sm:px-8 py-3 sm:py-4 rounded-lg font-semibold hover:bg-gold hover:text-primary transition-all duration-300">
+                            Download CV
+                        </button>
+                    </div>
+                    
+                    <div class="flex gap-4 sm:gap-6 justify-center lg:justify-start">
+                        <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 border border-gray-600 rounded-lg flex items-center justify-center hover:border-gold hover:text-gold transition-all duration-300">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 border border-gray-600 rounded-lg flex items-center justify-center hover:border-gold hover:text-gold transition-all duration-300">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                            </svg>
+                        </a>
+                        <a href="#" class="w-10 sm:w-12 h-10 sm:h-12 border border-gray-600 rounded-lg flex items-center justify-center hover:border-gold hover:text-gold transition-all duration-300">
+                            <svg class="w-4 sm:w-5 h-4 sm:h-5" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+                
+                <div class="loading order-1 lg:order-2">
+                    <div class="relative max-w-sm sm:max-w-md lg:max-w-lg mx-auto">
+                        <div class="absolute inset-0 bg-gold opacity-20 rounded-2xl blur-2xl animate-gentle-pulse"></div>
+                        <div class="relative">
+                            <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20250612_190729.jpg-8k7gtkOFXgzikqmJuZVsoN9mHDUpPJ.jpeg" alt="Whumo Brian Rinywe - Professional Portrait" 
+                                 class="hero-image w-full h-64 sm:h-80 lg:h-96 rounded-2xl shadow-2xl border border-gray-700">
+                            <div class="absolute inset-0 bg-gradient-to-t from-primary/60 to-transparent rounded-2xl"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 sm:py-20 lg:py-24 bg-secondary">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+                <div class="loading order-2 lg:order-1">
+                    <div class="relative">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20250612_190729.jpg-8k7gtkOFXgzikqmJuZVsoN9mHDUpPJ.jpeg" alt="Whumo Brian Rinywe - Working" 
+                             class="w-full h-64 sm:h-80 lg:h-96 object-cover rounded-xl shadow-xl">
+                        <div class="absolute inset-0 image-overlay rounded-xl"></div>
+                        <div class="absolute bottom-4 sm:bottom-6 left-4 sm:left-6 right-4 sm:right-6">
+                            <p class="text-gold font-medium text-sm sm:text-base">Passionate about innovation</p>
+                            <p class="text-platinum text-xs sm:text-sm">Bridging creativity and technology</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="loading order-1 lg:order-2">
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 sm:mb-8">
+                        <span class="text-platinum">About</span>
+                        <span class="text-gold-gradient"> Whumo Brian</span>
+                    </h2>
+                    <div class="space-y-4 sm:space-y-6 text-gray-300 text-base sm:text-lg leading-relaxed">
+                        <p>
+                            I'm a multi-disciplinary creative technologist with a passion for building innovative solutions 
+                            that merge cutting-edge technology with artistic expression. My journey spans across software 
+                            engineering, music production, and visual design.
+                        </p>
+                        <p>
+                            With years of experience in full-stack development, I specialize in creating scalable applications 
+                            and robust systems. My creative background in music production and graphic design brings a unique 
+                            perspective to every technical challenge.
+                        </p>
+                        <p>
+                            I believe in the power of technology to transform ideas into reality, whether it's building 
+                            enterprise software, producing original music, or crafting compelling visual narratives.
+                        </p>
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4 sm:gap-8 mt-8 sm:mt-12">
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-gold text-xl sm:text-2xl font-bold mb-2">50+</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Projects Completed</p>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-gold text-xl sm:text-2xl font-bold mb-2">5+</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Years Experience</p>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-gold text-xl sm:text-2xl font-bold mb-2">25+</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Happy Clients</p>
+                        </div>
+                        <div class="text-center sm:text-left">
+                            <h3 class="text-gold text-xl sm:text-2xl font-bold mb-2">100%</h3>
+                            <p class="text-gray-400 text-sm sm:text-base">Satisfaction Rate</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expertise Section -->
+    <section id="expertise" class="py-16 sm:py-20 lg:py-24 bg-primary">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20 loading">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+                    <span class="text-platinum">Core</span>
+                    <span class="text-gold-gradient"> Expertise</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
+                    Specialized skills across multiple disciplines, delivering comprehensive solutions 
+                    for complex creative and technical challenges.
+                </p>
+            </div>
+            
+            <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">
+                <div class="professional-card bg-secondary p-6 sm:p-8 rounded-xl loading">
+                    <div class="w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-gold to-yellow-600 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <svg class="w-6 sm:w-8 h-6 sm:h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-platinum">Software Engineering</h3>
+                    <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">Architecting scalable solutions with modern frameworks and best practices.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">React/Next.js</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Node.js/Python</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Cloud Architecture</span>
+                            <span class="text-xs sm:text-sm text-gold">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-secondary p-6 sm:p-8 rounded-xl loading">
+                    <div class="w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-gold to-yellow-600 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <svg class="w-6 sm:w-8 h-6 sm:h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-platinum">Full-Stack Development</h3>
+                    <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">End-to-end application development with modern tech stacks.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Database Design</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">API Development</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">DevOps/CI/CD</span>
+                            <span class="text-xs sm:text-sm text-gold">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-secondary p-6 sm:p-8 rounded-xl loading">
+                    <div class="w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-gold to-yellow-600 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <svg class="w-6 sm:w-8 h-6 sm:h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path d="M18 3a1 1 0 00-1.196-.98l-10 2A1 1 0 006 5v9.114A4.369 4.369 0 005 14c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V7.82l8-1.6v5.894A4.37 4.37 0 0015 12c-1.657 0-3 .895-3 2s1.343 2 3 2 3-.895 3-2V3z"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-platinum">Music Production</h3>
+                    <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">Professional audio production, mixing, and sound design.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Audio Engineering</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Sound Design</span>
+                            <span class="text-xs sm:text-sm text-gold">Advanced</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Music Composition</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-secondary p-6 sm:p-8 rounded-xl loading">
+                    <div class="w-12 sm:w-16 h-12 sm:h-16 bg-gradient-to-br from-gold to-yellow-600 rounded-xl flex items-center justify-center mb-4 sm:mb-6">
+                        <svg class="w-6 sm:w-8 h-6 sm:h-8 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                            <path fill-rule="evenodd" d="M4 3a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V5a2 2 0 00-2-2H4zm12 12H4l4-8 3 6 2-4 3 6z" clip-rule="evenodd"></path>
+                        </svg>
+                    </div>
+                    <h3 class="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-platinum">Graphic Design</h3>
+                    <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">Visual identity creation, branding, and digital design solutions.</p>
+                    <div class="space-y-2">
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Brand Identity</span>
+                            <span class="text-xs sm:text-sm text-gold">Expert</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">UI/UX Design</span>
+                            <span class="text-xs sm:text-sm text-gold">Advanced</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="text-xs sm:text-sm text-gray-400">Motion Graphics</span>
+                            <span class="text-xs sm:text-sm text-gold">Advanced</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Portfolio Section -->
+    <section id="portfolio" class="py-16 sm:py-20 lg:py-24 bg-secondary">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20 loading">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+                    <span class="text-platinum">Featured</span>
+                    <span class="text-gold-gradient"> Portfolio</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
+                    A curated selection of projects showcasing technical excellence and creative innovation 
+                    across multiple disciplines.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-12">
+                <div class="professional-card bg-primary rounded-xl overflow-hidden loading">
+                    <div class="relative h-48 sm:h-56 lg:h-64">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Enterprise Software Dashboard" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 image-overlay"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-gold text-primary px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Development</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-platinum">Enterprise Analytics Platform</h3>
+                        <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
+                            Full-stack business intelligence platform with real-time data visualization, 
+                            custom reporting, and advanced analytics capabilities.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">React</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Node.js</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">PostgreSQL</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">AWS</span>
+                        </div>
+                        <button class="text-gold hover:text-platinum transition-colors duration-300 font-medium text-sm sm:text-base">
+                            View Case Study →
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-primary rounded-xl overflow-hidden loading">
+                    <div class="relative h-48 sm:h-56 lg:h-64">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Music Production Studio" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 image-overlay"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-gold text-primary px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Music</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-platinum">Original Music Album</h3>
+                        <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
+                            Complete album production featuring 12 original compositions, professional mixing, 
+                            mastering, and sound design across multiple genres.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Ableton Live</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Sound Design</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Mixing</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Mastering</span>
+                        </div>
+                        <button class="text-gold hover:text-platinum transition-colors duration-300 font-medium text-sm sm:text-base">
+                            Listen Now →
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-primary rounded-xl overflow-hidden loading">
+                    <div class="relative h-48 sm:h-56 lg:h-64">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Brand Identity Design" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 image-overlay"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-gold text-primary px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Design</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-platinum">Tech Startup Brand Identity</h3>
+                        <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
+                            Complete visual identity system including logo design, brand guidelines, 
+                            marketing materials, and digital asset creation.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Adobe Creative Suite</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Figma</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Branding</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Print Design</span>
+                        </div>
+                        <button class="text-gold hover:text-platinum transition-colors duration-300 font-medium text-sm sm:text-base">
+                            View Project →
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-primary rounded-xl overflow-hidden loading">
+                    <div class="relative h-48 sm:h-56 lg:h-64">
+                        <img src="/placeholder.svg?height=300&width=500" alt="Mobile Application" 
+                             class="w-full h-full object-cover">
+                        <div class="absolute inset-0 image-overlay"></div>
+                        <div class="absolute top-4 left-4">
+                            <span class="bg-gold text-primary px-3 py-1 rounded-full text-xs sm:text-sm font-medium">Mobile</span>
+                        </div>
+                    </div>
+                    <div class="p-6 sm:p-8">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-platinum">Cross-Platform Mobile App</h3>
+                        <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
+                            Feature-rich mobile application with real-time synchronization, offline capabilities, 
+                            and seamless user experience across iOS and Android.
+                        </p>
+                        <div class="flex flex-wrap gap-2 mb-4 sm:mb-6">
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">React Native</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Firebase</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">Redux</span>
+                            <span class="bg-secondary text-gold px-2 sm:px-3 py-1 rounded-full text-xs sm:text-sm">TypeScript</span>
+                        </div>
+                        <button class="text-gold hover:text-platinum transition-colors duration-300 font-medium text-sm sm:text-base">
+                            View Details →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 sm:py-20 lg:py-24 bg-primary">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="text-center mb-12 sm:mb-16 lg:mb-20 loading">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+                    <span class="text-platinum">Let's</span>
+                    <span class="text-gold-gradient"> Collaborate</span>
+                </h2>
+                <p class="text-lg sm:text-xl text-gray-300 max-w-3xl mx-auto">
+                    Ready to bring your vision to life? Let's discuss how we can work together 
+                    to create something extraordinary.
+                </p>
+            </div>
+            
+            <div class="grid lg:grid-cols-2 gap-8 lg:gap-16">
+                <div class="loading">
+                    <div class="mb-8 sm:mb-12">
+                        <img src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/20250612_190729.jpg-8k7gtkOFXgzikqmJuZVsoN9mHDUpPJ.jpeg" alt="Whumo Brian Rinywe - Contact" 
+                             class="w-full h-48 sm:h-64 object-cover rounded-xl shadow-xl mb-4 sm:mb-6">
+                        <h3 class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4 text-platinum">Whumo Brian Rinywe</h3>
+                        <p class="text-gray-400 mb-4 sm:mb-6 text-sm sm:text-base">
+                            Available for freelance projects, collaborations, and full-time opportunities. 
+                            Let's discuss your next big idea.
+                        </p>
+                    </div>
+                    
+                    <div class="space-y-4 sm:space-y-6">
+                        <div class="flex items-center">
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gold rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 sm:w-6 h-5 sm:h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"></path>
+                                    <path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-xs sm:text-sm">Email</p>
+                                <p class="text-platinum font-medium text-sm sm:text-base">whumo.brian@example.com</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gold rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 sm:w-6 h-5 sm:h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-xs sm:text-sm">Location</p>
+                                <p class="text-platinum font-medium text-sm sm:text-base">Available Worldwide (Remote)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center">
+                            <div class="w-10 sm:w-12 h-10 sm:h-12 bg-gold rounded-lg flex items-center justify-center mr-3 sm:mr-4 flex-shrink-0">
+                                <svg class="w-5 sm:w-6 h-5 sm:h-6 text-primary" fill="currentColor" viewBox="0 0 20 20">
+                                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-12a1 1 0 10-2 0v4a1 1 0 00.293.707l2.828 2.829a1 1 0 101.415-1.415L11 9.586V6z" clip-rule="evenodd"></path>
+                                </svg>
+                            </div>
+                            <div>
+                                <p class="text-gray-400 text-xs sm:text-sm">Response Time</p>
+                                <p class="text-platinum font-medium text-sm sm:text-base">Within 24 hours</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="professional-card bg-secondary p-6 sm:p-8 rounded-xl loading">
+                    <form id="contact-form" class="space-y-4 sm:space-y-6">
+                        <div class="grid sm:grid-cols-2 gap-4 sm:gap-6">
+                            <div>
+                                <label for="name" class="block text-sm font-medium mb-2 text-platinum">Full Name</label>
+                                <input type="text" id="name" name="name" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-platinum text-sm sm:text-base">
+                            </div>
+                            <div>
+                                <label for="email" class="block text-sm font-medium mb-2 text-platinum">Email Address</label>
+                                <input type="email" id="email" name="email" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-platinum text-sm sm:text-base">
+                            </div>
+                        </div>
+                        <div>
+                            <label for="subject" class="block text-sm font-medium mb-2 text-platinum">Project Type</label>
+                            <select id="subject" name="subject" class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-platinum text-sm sm:text-base">
+                                <option value="">Select a project type</option>
+                                <option value="software-development">Software Development</option>
+                                <option value="music-production">Music Production</option>
+                                <option value="graphic-design">Graphic Design</option>
+                                <option value="consultation">Consultation</option>
+                                <option value="other">Other</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label for="message" class="block text-sm font-medium mb-2 text-platinum">Project Details</label>
+                            <textarea id="message" name="message" rows="5" required class="w-full px-3 sm:px-4 py-2 sm:py-3 bg-primary border border-gray-700 rounded-lg focus:ring-2 focus:ring-gold focus:border-transparent text-platinum text-sm sm:text-base" placeholder="Tell me about your project..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full professional-button py-3 sm:py-4 px-4 sm:px-6 rounded-lg font-semibold text-platinum text-sm sm:text-base">
+                            <span class="button-text">Send Message</span>
+                            <span class="button-loading hidden">Sending...</span>
+                        </button>
+                    </form>
+                    
+                    <!-- Success/Error Messages -->
+                    <div id="form-success" class="hidden mt-4 p-4 bg-green-600 bg-opacity-20 border border-green-600 rounded-lg">
+                        <p class="text-green-400 text-sm">Thank you! Your message has been sent successfully.</p>
+                    </div>
+                    <div id="form-error" class="hidden mt-4 p-4 bg-red-600 bg-opacity-20 border border-red-600 rounded-lg">
+                        <p class="text-red-400 text-sm">Sorry, there was an error sending your message. Please try again.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-8 sm:py-12">
+        <div class="container mx-auto px-4 sm:px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-4 sm:mb-6 md:mb-0 text-center md:text-left">
+                    <h3 class="text-xl sm:text-2xl font-bold text-gold-gradient mb-2">Whumo Brian Rinywe</h3>
+                    <p class="text-gray-400 text-sm sm:text-base">Creative Technologist</p>
+                </div>
+                <div class="flex flex-wrap justify-center gap-4 sm:gap-6">
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors duration-300 text-sm sm:text-base">Privacy Policy</a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors duration-300 text-sm sm:text-base">Terms of Service</a>
+                    <a href="#" class="text-gray-400 hover:text-gold transition-colors duration-300 text-sm sm:text-base">Sitemap</a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center">
+                <p class="text-gray-400 text-sm sm:text-base">&copy; 2024 Whumo Brian Rinywe. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Loading Screen
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                document.getElementById('loading-screen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loading-screen').style.display = 'none';
+                    // Trigger loading animations
+                    document.querySelectorAll('.loading').forEach(el => {
+                        el.classList.add('loaded');
+                    });
+                }, 500);
+            }, 1000);
+        });
+
+        // Mobile Menu Functionality
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileMenuClose = document.getElementById('mobile-menu-close');
+        const mobileMenuOverlay = document.getElementById('mobile-menu-overlay');
+
+        function openMobileMenu() {
+            mobileMenu.classList.add('active');
+            mobileMenuOverlay.classList.remove('hidden');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeMobileMenu() {
+            mobileMenu.classList.remove('active');
+            mobileMenuOverlay.classList.add('hidden');
+            document.body.style.overflow = '';
+        }
+
+        mobileMenuBtn.addEventListener('click', openMobileMenu);
+        mobileMenuClose.addEventListener('click', closeMobileMenu);
+        mobileMenuOverlay.addEventListener('click', closeMobileMenu);
+
+        // Close mobile menu when clicking on nav links
+        document.querySelectorAll('.mobile-nav-link').forEach(link => {
+            link.addEventListener('click', closeMobileMenu);
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80; // Account for fixed nav
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Professional scroll animations with Intersection Observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('loaded');
+                }
+            });
+        }, observerOptions);
+
+        // Observe loading elements
+        document.querySelectorAll('.loading').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            const sections = document.querySelectorAll('section[id]');
+            const navLinks = document.querySelectorAll('.nav-link');
+            
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop - 100;
+                const sectionHeight = section.clientHeight;
+                if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('text-gold');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('text-gold');
+                }
+            });
+        });
+
+        // Contact Form Functionality
+        const contactForm = document.getElementById('contact-form');
+        const formSuccess = document.getElementById('form-success');
+        const formError = document.getElementById('form-error');
+
+        contactForm.addEventListener('submit', async function(e) {
+            e.preventDefault();
+            
+            const submitBtn = contactForm.querySelector('button[type="submit"]');
+            const buttonText = submitBtn.querySelector('.button-text');
+            const buttonLoading = submitBtn.querySelector('.button-loading');
+            
+            // Show loading state
+            buttonText.classList.add('hidden');
+            buttonLoading.classList.remove('hidden');
+            submitBtn.disabled = true;
+            
+            // Hide previous messages
+            formSuccess.classList.add('hidden');
+            formError.classList.add('hidden');
+            
+            // Simulate form submission (replace with actual form handling)
+            try {
+                await new Promise(resolve => setTimeout(resolve, 2000)); // Simulate API call
+                
+                // Show success message
+                formSuccess.classList.remove('hidden');
+                contactForm.reset();
+                
+            } catch (error) {
+                // Show error message
+                formError.classList.remove('hidden');
+            } finally {
+                // Reset button state
+                buttonText.classList.remove('hidden');
+                buttonLoading.classList.add('hidden');
+                submitBtn.disabled = false;
+            }
+        });
+
+        // Form validation
+        const inputs = contactForm.querySelectorAll('input, textarea, select');
+        inputs.forEach(input => {
+            input.addEventListener('blur', function() {
+                if (this.hasAttribute('required') && !this.value.trim()) {
+                    this.classList.add('border-red-500');
+                } else {
+                    this.classList.remove('border-red-500');
+                }
+            });
+        });
+
+        // Keyboard navigation support
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && mobileMenu.classList.contains('active')) {
+                closeMobileMenu();
+            }
+        });
+
+        // Touch/swipe support for mobile menu
+        let touchStartX = 0;
+        let touchEndX = 0;
+
+        mobileMenu.addEventListener('touchstart', function(e) {
+            touchStartX = e.changedTouches[0].screenX;
+        });
+
+        mobileMenu.addEventListener('touchend', function(e) {
+            touchEndX = e.changedTouches[0].screenX;
+            if (touchEndX > touchStartX + 50) { // Swipe right to close
+                closeMobileMenu();
+            }
+        });
+
+        // Prevent scroll when mobile menu is open
+        mobileMenu.addEventListener('touchmove', function(e) {
+            e.preventDefault();
+        }, { passive: false });
+
+        // Performance optimization: Throttle scroll events
+        let ticking = false;
+        function updateOnScroll() {
+            // Navigation highlighting logic here
+            ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+            if (!ticking) {
+                requestAnimationFrame(updateOnScroll);
+                ticking = true;
+            }
+        });
+
+        // Accessibility improvements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add focus indicators for keyboard navigation
+            const focusableElements = document.querySelectorAll('a, button, input, textarea, select');
+            focusableElements.forEach(element => {
+                element.addEventListener('focus', function() {
+                    this.style.outline = '2px solid #d4af37';
+                    this.style.outlineOffset = '2px';
+                });
+                element.addEventListener('blur', function() {
+                    this.style.outline = '';
+                    this.style.outlineOffset = '';
+                });
+            });
+        });
+    </script>
+</body>
+</html>
